@@ -1,1 +1,143 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'styles/_mixins';
+@import 'styles/_colors';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: $color-charcoal-indigo;
+  color: $color-aqua-glow;
+}
+
+body {
+  line-height: 1.6;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  @include container;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  color: $color-vivid-violet;
+  margin-bottom: 15px;
+  line-height: 1.3;
+}
+
+h1 {
+  font-size: 38px;
+
+  @include xl {
+    font-size: 60px;
+  }
+}
+
+h2 {
+  font-size: 24px;
+
+  @include xl {
+    font-size: 38px;
+  }
+}
+
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+.primary-button {
+  padding: 12px 16px;
+  font-weight: bold;
+  color: white;
+  background-color: $color-vivid-violet;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.5s;
+
+  &:hover {
+    background-color: transparent;
+    box-shadow: 0 0 0 2px white;
+    color: white;
+    border-radius: 8px;
+    transition: 0.5s;
+  }
+}
+
+.gradient-border {
+  border-radius: 8px;
+  padding: 3px;
+  background: linear-gradient(to left bottom, $color-vivid-violet, $color-electric-pink, $color-sky-blue, $color-aqua-glow);
+}
+
+$loader-size: 14.6rem;
+$loader-offset: 1rem;
+$loader-timing: ease-in-out;
+
+.loader {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: $loader-size;
+  margin: $loader-size auto;
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    animation-duration: 1.8s;
+    animation-iteration-count: infinite;
+    animation-timing-function: $loader-timing;
+    filter: drop-shadow(0 0 $loader-offset/2.25 rgba($color-aqua-glow, 0.75));
+  }
+  &:before {
+    width: 100%;
+    padding-bottom: 100%;
+    box-shadow: inset 0 0 0 $loader-offset $color-aqua-glow;
+    animation-name: pulsA;
+  }
+  &:after {
+    width: calc(100% - #{$loader-offset}*2);
+    padding-bottom: calc(100% - #{$loader-offset}*2);
+    box-shadow: 0 0 0 0 $color-aqua-glow;
+    animation-name: pulsB;
+  }
+}
+
+@keyframes pulsA {
+  0% { box-shadow: inset 0 0 0 $loader-offset $color-aqua-glow; opacity: 1; }
+  50%, 100% { box-shadow: inset 0 0 0 0 $color-aqua-glow; opacity: 0; }
+}
+
+@keyframes pulsB {
+  0%, 50% { box-shadow: 0 0 0 0 $color-aqua-glow; opacity: 0; }
+  100% { box-shadow: 0 0 0 $loader-offset $color-aqua-glow; opacity: 1; }
+}

@@ -1,0 +1,84 @@
+@import '../../../../styles';
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  position: relative;
+
+  .logo {
+    line-height: 0;
+    max-width: 60px;
+
+    @include xl {
+      max-width: 85px;
+    }
+  }
+
+  .burger-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    span {
+      width: 25px;
+      height: 3px;
+      background-color: $color-electric-pink;
+      border-radius: 2px;
+    }
+
+    @include sm {
+      display: none;
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 20px;
+
+    a {
+      color: $color-electric-pink;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+
+      &:hover {
+        color: $color-vivid-violet;
+      }
+
+      &.active {
+        border-bottom: 2px solid $color-vivid-violet;
+      }
+    }
+
+    @include xs {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      right: 15px;
+      background-color: $color-charcoal-indigo;
+      border-radius: 8px;
+      padding: 10px;
+      gap: 10px;
+
+      &.nav-open {
+        display: flex;
+      }
+    }
+
+    @include sm {
+      display: flex;
+      flex-direction: row;
+      position: static;
+
+      a {
+        margin-right: 15px;
+      }
+    }
+  }
+}

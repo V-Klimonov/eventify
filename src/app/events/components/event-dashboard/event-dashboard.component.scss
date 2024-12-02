@@ -1,0 +1,61 @@
+@import '../../../../styles';
+
+.event {
+  &__dashboard {
+    h1, h2 {
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 20px;
+      margin-bottom: 20px;
+  
+      @include xl {
+        margin-top: 40px;
+        margin-bottom: 40px;
+      }
+    }
+  }
+
+  &__cards {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    
+    & > * {
+      margin-bottom: 15px;
+    }
+
+
+    @include md {
+      flex-direction: row;
+      margin-left: -10px;
+      margin-right: -10px;
+
+      & > * {
+        flex: 0 1 calc(50% - 20px);
+        margin-bottom: 20px;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+    }
+
+    @include xl {
+      & > * {
+        flex: 0 1 calc(33.333% - 20px);
+      }
+    }
+  }
+  
+  &__card {
+    background-color: $color-deep-twilight;
+    border-radius: 8px;
+    padding: 15px;
+    height: 100%;
+
+    @include xl {
+      padding: 20px;
+    }
+  }
+}

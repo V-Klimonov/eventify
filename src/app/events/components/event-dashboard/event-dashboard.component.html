@@ -1,0 +1,23 @@
+<div class="event__dashboard">
+  @if (events$ | async; as events){
+    @if (events.length) {
+      <h1>Event Dashboard</h1>
+      <div class="event__cards">
+        @for (event of events; track event.id) {
+          <div class="gradient-border">
+            <div class="event__card">
+              <h2>{{ event.name }}</h2>
+              <p>Date: {{ event.date }}</p>
+              <p>Location: {{ event.location }}</p>
+              <p>Description: {{ event.description }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    } @else {
+      <p>No events available.</p>
+    }
+  } @else {
+    <div class="loader"></div>
+  }
+</div>

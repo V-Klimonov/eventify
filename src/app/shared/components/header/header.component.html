@@ -1,0 +1,27 @@
+<header class="app-header">
+  <div class="logo">
+    <img src="https://v-klimonov.github.io/eventify-assets/eventify__logo.webp" alt="Eventify app logo">
+  </div>
+
+  <button class="burger-menu" (click)="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <nav class="nav-links" [class.nav-open]="menuOpen">
+    <a 
+      routerLink="/events"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >Event Dashboard</a>
+    <a routerLink="/events/new" routerLinkActive="active">Create Event</a>
+    @if (auth.isAuthenticated$ | async){
+      <button 
+        (click)="logout()"
+        class="primary-button"
+      >Logout</button>
+    }
+  </nav>
+</header>
+
