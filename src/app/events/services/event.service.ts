@@ -1,31 +1,36 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Event } from '../interfaces/event.interface';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { EventifyEvent } from '../interfaces/event.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EventService {
+  eventToUpdate: BehaviorSubject<EventifyEvent | null> = new BehaviorSubject<EventifyEvent | null>(null);
   private eventsUrl = 'https://6749f9018680202966334853.mockapi.io/api/v1/event';
 
   constructor(private http: HttpClient) {}
 
-  getEvents(): Observable<Event[]> {
-    return this.http.get<Event[]>(this.eventsUrl);
+  getEvents(): Observable<EventifyEvent[]> {
+    return this.http.get<EventifyEvent[]>(this.eventsUrl);
   }
 
-  addEvent(event: Event): Observable<Event> {
-    return this.http.post<Event>(this.eventsUrl, event);
+  addEvent(event: Event): Observable<EventifyEvent> {
+    return this.http.post<EventifyEvent>(this.eventsUrl, event);
   }
 
-  updateEvent(event: Event): Observable<Event> {
-    const url = `${this.eventsUrl}/${event.id}`;
-    return this.http.put<Event>(url, event);
+  updateEvent(eventFormData: Event, eventId: string): Observable<EventifyEvent> {
+    const url = `${this.eventsUrl}/${eventId}`;
+    return this.http.put<EventifyEvent>(url, eventFormData);
   }
 
   deleteEvent(id: string): Observable<void> {
     const url = `${this.eventsUrl}/${id}`;
     return this.http.delete<void>(url);
+  }
+
+  setEventToUpdate(event: EventifyEvent | null = null): void {
+    this.eventToUpdate.next(event);
   }
 }

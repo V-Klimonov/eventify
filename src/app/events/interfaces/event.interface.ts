@@ -1,8 +1,10 @@
-export interface Event {
+export interface EventifyEvent {
   id: string;
   name: string;
   date: string;
-  time: string;
+  startTime: string;
+  endTime: string;
+  allDay: boolean;
   location: string;
   description: string;
 }

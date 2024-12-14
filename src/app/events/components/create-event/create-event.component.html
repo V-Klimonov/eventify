@@ -1,49 +1,5 @@
-<div class="create-event">
+<section class="create-event">
   <div class="create-event__form-border gradient-border">
-    <div class="create-event__form-wrapper">
-      <h1>Create Event</h1>
-      <form [formGroup]="eventForm" (ngSubmit)="createEvent()">
-        <div>
-          <label for="name">Event Name:</label>
-          <input id="name" formControlName="name" />
-          @if (eventForm.get('name')?.invalid && eventForm.get('name')?.touched) {
-            <div>Event name is required.</div>
-          }
-        </div>
-        <div>
-          <label for="date">Event Date:</label>
-          <input id="date" type="date" formControlName="date" />
-          @if (eventForm.get('date')?.invalid && eventForm.get('date')?.touched) {
-            <div>Event date is required.</div>
-          }
-        </div>
-        <div>
-          <label for="time">Event Time:</label>
-          <input id="time" type="time" formControlName="time" />
-          @if (eventForm.get('time')?.invalid && eventForm.get('time')?.touched) {
-            <div>Event time is required.</div>
-          }
-        </div>
-        <div>
-          <label for="location">Location:</label>
-          <input id="location" formControlName="location" />
-          @if (eventForm.get('location')?.invalid && eventForm.get('location')?.touched) {
-            <div>Location is required.</div>
-          }
-        </div>
-        <div>
-          <label for="description">Description:</label>
-          <textarea id="description" formControlName="description"></textarea>
-          @if (eventForm.get('description')?.invalid && eventForm.get('description')?.touched) {
-            <div>Description is required.</div>
-          }
-        </div>
-        <button 
-          type="submit"
-          [disabled]="eventForm.invalid"
-          class="primary-button"
-        >Create Event</button>
-      </form>
-    </div>
+    <app-event-form [formType]="'create'"></app-event-form>
   </div>
-</div>
+</section>

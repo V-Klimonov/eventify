@@ -26,7 +26,7 @@ export const appConfig: ApplicationConfig = {
       domain: 'dev-qods6nw77omczya0.us.auth0.com',
       clientId: 'C3B1dJ9iWpyp6iR0FWVKc6ytiVEoHjRo',
       authorizationParams: {
-        redirect_uri: window.location.origin,
+        redirect_uri: 'https://v-klimonov.github.io/eventify',
       },
     }),
   ]

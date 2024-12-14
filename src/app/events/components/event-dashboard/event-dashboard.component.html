@@ -1,23 +1,80 @@
-<div class="event__dashboard">
-  @if (events$ | async; as events){
-    @if (events.length) {
-      <h1>Event Dashboard</h1>
-      <div class="event__cards">
-        @for (event of events; track event.id) {
+@if (events$ | async; as events){ 
+  @if (events.length) {
+    <div class="event__dashboard">
+      <app-edit-event></app-edit-event>
+
+      @if (!isEditEventOpen) {
+        <h1>Event Dashboard</h1>
+  
+        <div class="event__cards">
+          @for (event of events; track event.id) {
           <div class="gradient-border">
             <div class="event__card">
-              <h2>{{ event.name }}</h2>
-              <p>Date: {{ event.date }}</p>
-              <p>Location: {{ event.location }}</p>
-              <p>Description: {{ event.description }}</p>
+              <div class="event__card__settings" (click)="$event.stopPropagation()">
+                @if (eventMenuOpen === event.id) {
+                <div class="event__card__settings__items">
+                  <div
+                    class="event__card__settings__button"
+                    (click)="toggleMenu(event.id)"
+                  >
+                    <app-svg svg="close" fill="#4AE7F9"></app-svg>
+                  </div>
+  
+                  <p (click)="addToGoogleCalendar(event)">Add to my Calendar</p>
+                  <p (click)="editEvent(event)">Edit</p>
+                  <p (click)="deleteEvent(event.id)">Delete</p>
+                </div>
+                } @else {
+                <div
+                  class="event__card__settings__button"
+                  (click)="toggleMenu(event.id)"
+                >
+                  <app-svg svg="vertical-dots" fill="#4AE7F9"></app-svg>
+                </div>
+                }
+              </div>
+  
+              <div class="event__card__content">
+                <h2>{{ event.name }}</h2>
+  
+                <ul>
+                  <li class="event__card__item">
+                    <div>
+                      <app-svg svg="calendar"></app-svg>
+                      <p>{{ event.date }}</p>
+                    </div>
+  
+                    <div>
+                      <app-svg svg="clock"></app-svg>
+  
+                      @if (event.allDay) {
+                      <p>All Day</p>
+                      } @else {
+                      <p>{{ event.startTime }} - {{ event.endTime }}</p>
+                      }
+                    </div>
+                  </li>
+  
+                  <li class="event__card__item">
+                    <app-svg svg="location"></app-svg>
+                    <p>{{ event.location }}</p>
+                  </li>
+  
+                  <li class="event__card__item">
+                    <app-svg svg="comment"></app-svg>
+                    <p>{{ event.description }}</p>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-        }
-      </div>
-    } @else {
-      <p>No events available.</p>
-    }
+          }
+        </div>
+      }
+    </div>
   } @else {
-    <div class="loader"></div>
-  }
-</div>
+    <p>No events available.</p>
+  } 
+} @else {
+  <div class="loader"></div>
+}

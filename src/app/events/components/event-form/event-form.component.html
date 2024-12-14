@@ -1,0 +1,78 @@
+<div class="event-form">
+  <div class="event-form__close-button" (click)="closeForm()">
+    <app-svg svg="close" fill="#4AE7F9"></app-svg>
+  </div>
+
+  <h1>{{ formType === 'edit' ? 'Edit Event' : 'Create Event'}}</h1>
+  <form [formGroup]="eventForm" (ngSubmit)="handleEventFormSubmit()">
+    <div>
+      <label for="name">Event Name:</label>
+      <input id="name" formControlName="name" />
+      @if (eventForm.get('name')?.invalid && eventForm.get('name')?.touched) {
+        <div>Event name is required.</div>
+      }
+    </div>
+
+    <div>
+      <label for="date">Event Date:</label>
+      <input id="date" type="date" formControlName="date" />
+      @if (eventForm.get('date')?.invalid && eventForm.get('date')?.touched) {
+        <div>Event date is required.</div>
+      }
+    </div>
+
+    <div>
+      <label>
+        <input type="checkbox" formControlName="allDay" />
+        All Day
+      </label>
+    </div>
+    
+    <div>
+      <label for="startTime">Start Time:</label>
+      <input
+        id="startTime"
+        type="time"
+        formControlName="startTime"
+      />
+      @if (eventForm.get('startTime')?.invalid && eventForm.get('startTime')?.touched) {
+        <div>Start time is required.</div>
+      }
+    </div>
+    
+    <div>
+      <label for="endTime">End Time:</label>
+      <input
+        id="endTime"
+        type="time"
+        formControlName="endTime"
+      />
+      @if (eventForm.get('endTime')?.invalid && eventForm.get('endTime')?.touched) {
+        <div>End time is required.</div>
+      }
+    </div>
+        
+
+    <div>
+      <label for="location">Location:</label>
+      <input id="location" formControlName="location" />
+      @if (eventForm.get('location')?.invalid && eventForm.get('location')?.touched) {
+        <div>Location is required.</div>
+      }
+    </div>
+
+    <div>
+      <label for="description">Description:</label>
+      <textarea id="description" formControlName="description"></textarea>
+      @if (eventForm.get('description')?.invalid && eventForm.get('description')?.touched) {
+        <div>Description is required.</div>
+      }
+    </div>
+
+    <button 
+      type="submit"
+      [disabled]="eventForm.invalid"
+      class="primary-button"
+    >{{ formType === 'edit' ? 'Update Event' : 'Create Event'}}</button>
+  </form>
+</div>
