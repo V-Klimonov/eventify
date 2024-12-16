@@ -1,12 +1,12 @@
-<div class="login-container">
-  @if (!(isLoading$ | async)) {
+@if (!(isLoading$ | async)) {
+  <div class="login-container">
     <img src="https://v-klimonov.github.io/eventify-assets/eventify__logo.webp" alt="Eventify app logo">
     <p>Please log in to continue</p>
     <button 
       (click)="login()"
       class="primary-button"
     >Login</button>
-  } @else {
-    <div class="loader"></div>
-  }
-</div>
+  </div>
+} @else {
+  <div class="loader"></div>
+}
